@@ -12,28 +12,29 @@
 ##################################################
 #
 #
-__author__='''
+#(__author__)='''
 
 ######################################################
-                By S.S.B Group                          
+ #               By S.S.B Group                          
 ######################################################
 
-    Suraj Singh
-    Admin
-    S.S.B Group
-    surajsinghbisht054@gmail.com
-    http://bitforestinfo.blogspot.in/
+ #   Suraj Singh
+ #   Admin
+ #   S.S.B Group
+ #   surajsinghbisht054@gmail.com
+ #   http://bitforestinfo.blogspot.in/
 
-    Note: We Feel Proud To Be Indian
+ #   Note: We Feel Proud To Be Indian
 ######################################################
-'''
+#'''
+
 # =================Other Configuration================ 
 # Usages :
 usage = "usage: %prog [options] "
 # Version
-Version="%prog 0.0.1"
+Version="%prog 0.0.2"
 # ====================================================
-print __author__
+#print __author__
  
 # Import Modules
 import rarfile,optparse,sys,fileinput,time
@@ -45,26 +46,26 @@ class main:
 		self.start_cracking_engine()
 
 	def time_management(self):
-		print "[*]	Starting Time ",self.starttime
-		print "[*]	Closing  Time ",self.closetime
-		print "[*]	Password Try  ",self.pwdtries
-		print "[*]	Average Speed ",self.pwdtries/(self.closetime-self.starttime)
+		print ("[*]	Starting Time ",self.starttime)
+		print ("[*]	Closing  Time ",self.closetime)
+		print ("[*]	Password Try  ",self.pwdtries)
+		print ("[*]	Average Speed ",self.pwdtries/(self.closetime-self.starttime))
 		return
 
 	def start_cracking_engine(self):
-		print "[+]	Loading rarfile...  ",
+		print ("[+]	Loading rarfile...  ")
 		fileload=rarfile.RarFile(self.filename)
-		print "OK"
+		print ("OK")
 		if self.dictionery:
-			print "[+]	Using Dictonery Option.... OK"
-			print "[+]	Loading Dictonery File...  OK"
-			print "[+]	Brute Force Started ..."
+			print ("[+]	Using Dictonery Option.... OK")
+			print ("[+]	Loading Dictonery File...  OK")
+			print ("[+]	Brute Force Started ...")
 			for i in fileinput.input(self.dictionery):
 				pwd=i.strip('\n')
 				self.extracting_engine(fileload,pwd)
 		if self.crunch:
-			print "[+] Connection Stablished as Pipe... OK"
-			print "[+]	Brute Force Started ..."
+			print ("[+] Connection Stablished as Pipe... OK")
+			print ("[+]	Brute Force Started ...")
 			for i in sys.stdin:
 				pwd=i.strip('\n')
 				self.extracting_engine(fileload,pwd)
@@ -73,20 +74,20 @@ class main:
 		return
 
 	def check_input_conditions(self):
-		if not self.filename:
-			print "[ Error ] Please Provide Rar File Path "
+		if (not self.filename):
+			print ("[ Error ] Please Provide Rar File Path ")
 			sys.exit(0)
-		print "[+]	Checking Rar File Condition ...",
-		if not rarfile.is_rarfile(self.filename):
-			print "[ Error ] Bad Rar file"
+		print ("[+]	Checking Rar File Condition ...")
+		if (not rarfile.is_rarfile(self.filename)):
+			print ("[ Error ] Bad Rar file")
 			sys.exit(0)
-		print "	Ok"
+		print ("Ok")
 
-		if not self.dictionery and not self.crunch:
-			print "[ Error ] Please Provide Dictonery Or Crunch Or Password Option"
+		if (not self.dictionery and not self.crunch):
+			print ("[ Error ] Please Provide Dictonery Or Crunch Or Password Option")
 			sys.exit(0)
 		if self.dictionery and self.crunch:
-			print "[ Error ] Please Choose Any One Option From Dict or Crunch"
+			print ("[ Error ] Please Choose Any One Option From Dict or Crunch")
 			sys.exit(0)
 		return
 
@@ -113,16 +114,16 @@ class main:
 			data="\n\t !-Congratulation-! \n\t\tPassword Found = "+pwd+'\n'
 		else:
 			data="\n\t Sorry! Password Not Found \n\n"
-		print data
+		print (data)
 		if self.result:
-			print "[+] Saving Output in ",self.result
+			print ("[+] Saving Output in ",self.result)
 			f=open(self.result,'a')
 			f.write(data)
 			f.close()
 		self.closetime=time.time()
 		self.time_management()
 		if pwd:
-			print "[+] Exiting..."
+			print ("[+] Exiting...")
 			sys.exit(0)
 		return
 
@@ -138,7 +139,7 @@ class main:
 		parser.add_option("-c", "--crunch", action="store", type="string", dest="crunch", help="For Using Passwords Directly from crunch use this arguments: -c True or --crunch True", default=None)
 		(option, args)=parser.parse_args()
 		# Record Inputs Data
-		print "[+] Extracting Input Data..."
+		print ("[+] Extracting Input Data...")
 		self.filename=option.filename
 		self.dictionery=option.dictionery
 		self.output=option.output
